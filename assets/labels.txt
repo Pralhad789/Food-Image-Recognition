@@ -1,0 +1,8 @@
+Apple
+Banana
+Dates
+Grapes
+Mango
+Orange
+Pear
+Watermelon

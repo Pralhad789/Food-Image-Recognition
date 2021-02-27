@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "251707516822",
+    "project_id": "foodnutrilog",
+    "storage_bucket": "foodnutrilog.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:251707516822:android:9e474e75698ff0f66b9fb7",
+        "android_client_info": {
+          "package_name": "com.example.FoodNutrition"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "251707516822-ehmsc8vnf0gmo1gacnu15els030lcq3t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.FoodNutrition",
+            "certificate_hash": "f08beebedca1684ab4fff6a3dc0dd5cb910b52fe"
+          }
+        },
+        {
+          "client_id": "251707516822-7esqno2ortpm2ms1v799mcscs40j2v8s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCH54Wz2Bdahcikr1HyFESBFsahAKzvAHM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "251707516822-7esqno2ortpm2ms1v799mcscs40j2v8s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
