@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tflite/tflite.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:FoodNutrition/loginpage.dart';
 import 'src/nutritioninfo.dart';
@@ -16,6 +17,7 @@ class _HomeState extends State<Home> {
   File _image;
   List _output;
   final picker =ImagePicker();
+  User firebaseUser;
 
   @override
   void initState() {
@@ -48,7 +50,7 @@ class _HomeState extends State<Home> {
 
   getUser() async{
 
-    User firebaseUser = _auth.currentUser;
+    firebaseUser = _auth.currentUser;
     await firebaseUser?.reload();
     firebaseUser = _auth.currentUser;
 
@@ -65,10 +67,16 @@ class _HomeState extends State<Home> {
     _auth.signOut();
   }
 
+  Future<String> getCurrentUID() async {
+    return (_auth.currentUser.uid);
+  }
+
   //******************************************/
   
   List<NutritionInfo> _foodItems=foodItems;
   List<NutritionInfo> _filteredFoodItems;
+
+  final NutritionInfo nutrition = NutritionInfo();
   
   classifyImage(File image) async{
     var output=await Tflite.runModelOnImage(path: image.path, numResults: 8,
@@ -81,6 +89,15 @@ class _HomeState extends State<Home> {
     print('name of food item : -${_filteredFoodItems[0].fName}');
     print('Standard quantity of food item : -${_filteredFoodItems[0].fStdQty}');
     print('Calorie count item of food item : -${_filteredFoodItems[0].fStdQtyCalorie}');
+
+    //Send data to firebase
+    String uid = _auth.currentUser.uid;
+    FirebaseFirestore.instance.collection("UserData").doc(uid).collection("FoodItems").add({
+      'FoodName' : _filteredFoodItems[0].fName,
+      'Quantity' : _filteredFoodItems[0].fStdQty,
+      'Calorie'  : _filteredFoodItems[0].fStdQtyCalorie
+    });
+
 
     setState(() {
       _output=output;
@@ -180,7 +197,7 @@ class _HomeState extends State<Home> {
                                 ),
                               ),
                               SizedBox(height: 20,),
-                              _output!=null? Text('Prediction is: ${_output[0]['label']} Info: stdQty: ${_filteredFoodItems[0].fStdQty}  stdCalorie:${_filteredFoodItems[0].fStdQty}',
+                              _output!=null? Text('Prediction is: ${_output[0]['label']}\n Info: Qty: ${_filteredFoodItems[0].fStdQty} Calorie:${_filteredFoodItems[0].fStdQty}',
                               style: TextStyle(color: Colors.black,
                               fontSize: 20),):Container(
 

@@ -8,18 +8,34 @@ class NutritionInfo{
   const NutritionInfo({
     this.fName, this.fStdQty, this.fStdQtyCalorie
   }); 
+
+
+  Map<String,dynamic> toJson() => {
+   
+   'Name' : fName,
+   'Quantity' : fStdQty,
+   'Calorie' : fStdQtyCalorie,
+  };
+
 }
+
 
 final foodItems=[
   new NutritionInfo(
     fName: "Apple",
-    fStdQty: 100,
-    fStdQtyCalorie: 20,
+    fStdQty: 182,
+    fStdQtyCalorie: 95,
   ),
 
   new NutritionInfo(
     fName: "Orange",
-    fStdQty: 80,
-    fStdQtyCalorie: 10
+    fStdQty: 100,
+    fStdQtyCalorie: 47
+  ),
+
+  new NutritionInfo(
+    fName: "Banana",
+    fStdQty: 118,
+    fStdQtyCalorie: 110
   )
 ];
