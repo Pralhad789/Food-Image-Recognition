@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:FoodNutrition/foodloglist.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tflite/tflite.dart';
@@ -134,6 +135,11 @@ class _HomeState extends State<Home> {
     });
     classifyImage(_image);
   }
+
+  Future navigatetofoodloglist(context) async {
+  Navigator.push(context, MaterialPageRoute(builder: (context) => foodloglist()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -264,6 +270,12 @@ class _HomeState extends State<Home> {
           ),
 
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.list),
+          onPressed: () {
+            navigatetofoodloglist(context);
+          },
       ),
     );
   }
