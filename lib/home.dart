@@ -18,8 +18,6 @@ class _HomeState extends State<Home> {
   bool _loading=true;
   File _image;
   List _output;
-  int _calorietotal;
-  DateTime _currentDate;
   DateTime date;
   final picker =ImagePicker();
   User firebaseUser;
@@ -27,14 +25,8 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    this.checkAuthentification();
-    DateTime date = Timestamp.now().toDate();
-    String formatteddate = DateFormat('dd-MM-yyyy').format(date);
-    print("THE CURRENT DATE IS :");
-    print(date);
-    print(formatteddate);
-    this.getUser();
-    //this.getCurrentDate();
+    this.checkAuthentification();    
+    this.getUser();    
     loadModel().then((value){
       setState(() {
 
@@ -42,14 +34,12 @@ class _HomeState extends State<Home> {
     });
   }
 
-  // Firebase authentication to check if user is logged in or not
+  //## Firebase authentication to check if user is logged in or not
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   User user;
-  bool isloggedin= false;
-  String currentDate = "";
-  int calorietotal = 0;
-
+  bool isloggedin= false;  
+  
 
   checkAuthentification() async{
 
@@ -62,7 +52,7 @@ class _HomeState extends State<Home> {
     });
   }
 
-  
+  //## Check if current user exists or not
   getUser() async{
 
     firebaseUser = _auth.currentUser;
@@ -86,8 +76,8 @@ class _HomeState extends State<Home> {
     return (_auth.currentUser.uid);
   }
 
-  //******************************************/
-  
+
+  //## Created a list for nutrition info  
   List<NutritionInfo> _foodItems=foodItems;
   List<NutritionInfo> _filteredFoodItems;
 
@@ -98,7 +88,7 @@ class _HomeState extends State<Home> {
     threshold: 0.2, imageMean: 127.5, imageStd: 127.5,
     );
     
-    // Get Current Date
+    //## Get Current Date
     DateTime date = Timestamp.now().toDate();
     String formatteddate = DateFormat('dd-MM-yyyy').format(date);
     print("THE CURRENT DATE IS :");
@@ -112,7 +102,7 @@ class _HomeState extends State<Home> {
     print('Standard quantity of food item : -${_filteredFoodItems[0].fStdQty}');
     print('Calorie count item of food item : -${_filteredFoodItems[0].fStdQtyCalorie}');
     
-    //Send data to firebase
+    //## Send data to firebase
     String uid = _auth.currentUser.uid;
     FirebaseFirestore.instance.collection("UserData").doc(uid).collection("FoodItems").add({
       'FoodName' : _filteredFoodItems[0].fName,
@@ -120,25 +110,26 @@ class _HomeState extends State<Home> {
       'Calorie'  : _filteredFoodItems[0].fStdQtyCalorie,
       'DateTime' : formatteddate
     });
-
-
     
     setState(() {
       _output=output;
-      _loading=false;
-      _calorietotal = calorietotal;
+      _loading=false;      
     });
   }
+
+
+  //## Load the Tflite model
   loadModel() async{
     await Tflite.loadModel(model: 'assets/model_new2.tflite', labels: 'assets/labels_new2.txt');
   }
 
   @override
-  void dispose() {
-    // TODO: implement dispose
+  void dispose() {    
     Tflite.close();
     super.dispose();
   }
+
+  //## Pick image from Camera
   pickImage() async{
     var image= await picker.getImage(source: ImageSource.camera);
     if(image==null){
@@ -149,6 +140,8 @@ class _HomeState extends State<Home> {
     });
     classifyImage(_image);
   }
+
+  //Pick image from image gallery
   pickGalleryImage() async{
     var image= await picker.getImage(source: ImageSource.gallery);
     if(image==null){
@@ -163,6 +156,8 @@ class _HomeState extends State<Home> {
   Future navigatetofoodloglist(context) async {
   Navigator.push(context, MaterialPageRoute(builder: (context) => foodloglist()));
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -227,7 +222,7 @@ class _HomeState extends State<Home> {
                                 ),
                               ),
                               SizedBox(height: 20,),
-                              _output!=null? Text('Prediction is: ${_output[0]['label']}\n Info: Qty: ${_filteredFoodItems[0].fStdQty} Calorie:${_filteredFoodItems[0].fStdQty}\n Total Calorie: $calorietotal',
+                              _output!=null? Text('Prediction is: ${_output[0]['label']}\n Info: Qty: ${_filteredFoodItems[0].fStdQty} Calorie:${_filteredFoodItems[0].fStdQty}',
                               style: TextStyle(color: Colors.black,
                               fontSize: 20),):Container(
 

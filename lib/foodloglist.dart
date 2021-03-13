@@ -2,7 +2,6 @@ import 'package:FoodNutrition/loginpage.dart';
 import 'package:FoodNutrition/totalhistorylist.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-//import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -30,7 +29,7 @@ List userfooditemlist = [];
   }
 
 
-
+  //## Check user authentication
   checkAuthentification() async{
 
     _auth.authStateChanges().listen((user) { 
@@ -46,11 +45,14 @@ List userfooditemlist = [];
   Future getUserData() async{
     List itemsList = [];
     int calorietotal = 0;
+
     DateTime date = Timestamp.now().toDate();
     String currentdate = DateFormat('dd-MM-yyyy').format(date);
     print("The CURRENT DATE FROM FOODLOG LIST IS:");
     print(currentdate);
     
+    //## Retrieve list from firestore and also calculate the total calorie values
+
     try{
        await fooditemslist.get().then((QuerySnapshot){
          QuerySnapshot.docs.forEach((element){
@@ -63,8 +65,7 @@ List userfooditemlist = [];
               calorietotal = calorietotal + itemsList[i]['Calorie'];
               print(calorietotal);
               print("THE DATE FETCHED FROM FIRESTORE :");
-              print(itemsList[i]['DateTime']);
-              // print(DateTime.now().toString());
+              print(itemsList[i]['DateTime']);              
         }
          else
          {
@@ -75,6 +76,7 @@ List userfooditemlist = [];
        print("THE foodloglist CALORIE TOTAL VALUE IS :");
        print(calorietotal);
 
+       //## Update the "calorietotal" variable value to firestore to TotalTally collection
        String uid = _auth.currentUser.uid;
        FirebaseFirestore.instance.collection("UserData")
        .doc(uid)
@@ -84,6 +86,7 @@ List userfooditemlist = [];
        .then((_){print("Success");});
        
        });
+
       return itemsList;
     }
     catch(e){
@@ -112,8 +115,8 @@ List userfooditemlist = [];
   }
 
   
-    @override
-    Widget build(BuildContext){
+  @override
+  Widget build(BuildContext){
       return Scaffold(
        appBar: AppBar(
          title: Text('Food Log list'),
@@ -151,38 +154,4 @@ List userfooditemlist = [];
 
     }
 
-  // @override
-  // Widget build(BuildContext context) {
-  //   return Scaffold(
-  //     appBar: AppBar(
-  //       title: Text('Food Log list'),
-  //       backgroundColor: Colors.redAccent,
-  //     ),
-  //     body: StreamBuilder(
-  //       stream: FirebaseFirestore.instance.collection("UserData").doc(FirebaseAuth.instance.currentUser.uid).collection("FoodItems").snapshots(),
-  //       builder: (BuildContext context , AsyncSnapshot<QuerySnapshot> snapshot){
-  //         if(!snapshot.hasData){
-  //           return Center(
-  //             child: CircularProgressIndicator(),
-  //           );
-  //         }
-
-  //         return ListView(
-  //           children: snapshot.data.docs.map((DocumentSnapshot doc){
-  //             return Center(
-  //               child: Container(
-  //                 width: MediaQuery.of(context).size.width/1.2,
-  //                 height: MediaQuery.of(context).size.height/6,
-  //                 child: Text("Data :" + doc.data()['Name'] + doc.data()['Calorie']),
-  //               ),
-  //             );
-
-  //           }).toList(),
-  //         );
-      
-
-  //       },
-  //     ),
-  //   );
-  // }
 }

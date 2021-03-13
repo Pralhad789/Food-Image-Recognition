@@ -22,7 +22,7 @@ class _totalhistorylistState extends State<totalhistorylist> {
   @override
   void initState() {
     super.initState();
-    //checkAuthentification();
+    checkAuthentification();
     fetchlist();  
 
   }
@@ -38,7 +38,7 @@ class _totalhistorylistState extends State<totalhistorylist> {
     });
   }
 
-
+  //## Retrieve data from TotalTally collection
   Future gethistorydata() async {
     List retrievedlist = [];
 
