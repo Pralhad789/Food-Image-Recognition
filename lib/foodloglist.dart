@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class foodloglist extends StatefulWidget {
   @override
@@ -13,14 +14,18 @@ class _foodloglistState extends State<foodloglist> {
 
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
-final CollectionReference fooditemslist = FirebaseFirestore.instance.collection("UserData").doc(FirebaseAuth.instance.currentUser.uid).collection("FoodItems");
+final Query fooditemslist = FirebaseFirestore.instance.collection("UserData")
+                            .doc(FirebaseAuth.instance.currentUser.uid)
+                            .collection("FoodItems")                            
+                            .orderBy("DateTime",descending: true);
 List userfooditemlist = [];
+
 
 @override
   void initState() {
     super.initState();
     checkAuthentification();
-    fetchUserItemList();
+    fetchUserItemList();    
   }
 
 
@@ -36,16 +41,39 @@ List userfooditemlist = [];
     });
   }
 
-
+    
   Future getUserData() async{
     List itemsList = [];
-
+    int calorietotal = 0;
+    DateTime date = Timestamp.now().toDate();
+    String currentdate = DateFormat('dd-MM-yyyy').format(date);
+    print("The CURRENT DATE FROM FOODLOG LIST IS:");
+    print(currentdate);
+    
     try{
        await fooditemslist.get().then((QuerySnapshot){
          QuerySnapshot.docs.forEach((element){
            itemsList.add(element.data());
          });
-
+       for(var i=0;i<itemsList.length;i++)
+       {
+         if(itemsList[i]['DateTime'] == currentdate)
+         {
+              calorietotal = calorietotal + itemsList[i]['Calorie'];
+              print(calorietotal);
+              print("THE DATE FETCHED FROM FIRESTORE :");
+              print(itemsList[i]['DateTime']);
+              // print(DateTime.now().toString());
+        }
+         else
+         {
+           print("No Addition of data");
+         }
+           
+       }
+       print("THE foodloglist CALORIE TOTAL VALUE IS :");
+       print(calorietotal);
+       
        });
       return itemsList;
     }
@@ -70,8 +98,7 @@ List userfooditemlist = [];
     }
   }
 
-
-
+  
     @override
     Widget build(BuildContext){
       return Scaffold(

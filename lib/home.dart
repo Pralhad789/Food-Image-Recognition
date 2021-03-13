@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:FoodNutrition/loginpage.dart';
 import 'src/nutritioninfo.dart';
+import 'package:intl/intl.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -17,6 +18,9 @@ class _HomeState extends State<Home> {
   bool _loading=true;
   File _image;
   List _output;
+  int _calorietotal;
+  DateTime _currentDate;
+  DateTime date;
   final picker =ImagePicker();
   User firebaseUser;
 
@@ -24,7 +28,13 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     this.checkAuthentification();
+    DateTime date = Timestamp.now().toDate();
+    String formatteddate = DateFormat('dd-MM-yyyy').format(date);
+    print("THE CURRENT DATE IS :");
+    print(date);
+    print(formatteddate);
     this.getUser();
+    //this.getCurrentDate();
     loadModel().then((value){
       setState(() {
 
@@ -37,6 +47,9 @@ class _HomeState extends State<Home> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   User user;
   bool isloggedin= false;
+  String currentDate = "";
+  int calorietotal = 0;
+
 
   checkAuthentification() async{
 
@@ -49,6 +62,7 @@ class _HomeState extends State<Home> {
     });
   }
 
+  
   getUser() async{
 
     firebaseUser = _auth.currentUser;
@@ -80,9 +94,16 @@ class _HomeState extends State<Home> {
   final NutritionInfo nutrition = NutritionInfo();
   
   classifyImage(File image) async{
-    var output=await Tflite.runModelOnImage(path: image.path, numResults: 8,
+    var output=await Tflite.runModelOnImage(path: image.path, numResults: 13,
     threshold: 0.2, imageMean: 127.5, imageStd: 127.5,
     );
+    
+    // Get Current Date
+    DateTime date = Timestamp.now().toDate();
+    String formatteddate = DateFormat('dd-MM-yyyy').format(date);
+    print("THE CURRENT DATE IS :");
+    print(date);
+    print(formatteddate);
 
     print("The output is : $output");
 
@@ -90,23 +111,26 @@ class _HomeState extends State<Home> {
     print('name of food item : -${_filteredFoodItems[0].fName}');
     print('Standard quantity of food item : -${_filteredFoodItems[0].fStdQty}');
     print('Calorie count item of food item : -${_filteredFoodItems[0].fStdQtyCalorie}');
-
+    
     //Send data to firebase
     String uid = _auth.currentUser.uid;
     FirebaseFirestore.instance.collection("UserData").doc(uid).collection("FoodItems").add({
       'FoodName' : _filteredFoodItems[0].fName,
       'Quantity' : _filteredFoodItems[0].fStdQty,
-      'Calorie'  : _filteredFoodItems[0].fStdQtyCalorie
+      'Calorie'  : _filteredFoodItems[0].fStdQtyCalorie,
+      'DateTime' : formatteddate
     });
 
 
+    
     setState(() {
       _output=output;
       _loading=false;
+      _calorietotal = calorietotal;
     });
   }
   loadModel() async{
-    await Tflite.loadModel(model: 'assets/model.tflite', labels: 'assets/labels.txt');
+    await Tflite.loadModel(model: 'assets/model_new2.tflite', labels: 'assets/labels_new2.txt');
   }
 
   @override
@@ -203,7 +227,7 @@ class _HomeState extends State<Home> {
                                 ),
                               ),
                               SizedBox(height: 20,),
-                              _output!=null? Text('Prediction is: ${_output[0]['label']}\n Info: Qty: ${_filteredFoodItems[0].fStdQty} Calorie:${_filteredFoodItems[0].fStdQty}',
+                              _output!=null? Text('Prediction is: ${_output[0]['label']}\n Info: Qty: ${_filteredFoodItems[0].fStdQty} Calorie:${_filteredFoodItems[0].fStdQty}\n Total Calorie: $calorietotal',
                               style: TextStyle(color: Colors.black,
                               fontSize: 20),):Container(
 
@@ -270,6 +294,7 @@ class _HomeState extends State<Home> {
           ),
 
         ),
+        
       ),
       floatingActionButton: FloatingActionButton(
           child: Icon(Icons.list),

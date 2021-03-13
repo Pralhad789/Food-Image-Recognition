@@ -37,5 +37,35 @@ final foodItems=[
     fName: "Banana",
     fStdQty: 118,
     fStdQtyCalorie: 110
-  )
+  ),
+
+  new NutritionInfo(
+    fName: "Dosa",
+    fStdQty: 97,
+    fStdQtyCalorie: 68
+  ),
+
+  new NutritionInfo(
+    fName: "Watermelon",
+    fStdQty: 286,
+    fStdQtyCalorie: 86
+  ),
+
+  new NutritionInfo(
+    fName: "Dates",
+    fStdQty: 7,
+    fStdQtyCalorie: 20
+  ),
+
+  new NutritionInfo(
+    fName: "VegSandwhich",
+    fStdQty: 363,
+    fStdQtyCalorie: 560
+  ),
+
+  new NutritionInfo(
+    fName: "Grapes",
+    fStdQty: 49,
+    fStdQtyCalorie: 34
+  ),
 ];
