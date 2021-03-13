@@ -1,4 +1,5 @@
 import 'package:FoodNutrition/loginpage.dart';
+import 'package:FoodNutrition/totalhistorylist.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:firebase_core/firebase_core.dart';
@@ -73,6 +74,14 @@ List userfooditemlist = [];
        }
        print("THE foodloglist CALORIE TOTAL VALUE IS :");
        print(calorietotal);
+
+       String uid = _auth.currentUser.uid;
+       FirebaseFirestore.instance.collection("UserData")
+       .doc(uid)
+       .collection("TotalTally")
+       .doc(currentdate)
+       .update({"Date" : currentdate, "TotalValue" : calorietotal})
+       .then((_){print("Success");});
        
        });
       return itemsList;
@@ -96,6 +105,10 @@ List userfooditemlist = [];
 
       });
     }
+  }
+   
+  Future navigatetohistorylist(context) async {
+  Navigator.push(context, MaterialPageRoute(builder: (context) => totalhistorylist()));
   }
 
   
@@ -128,7 +141,12 @@ List userfooditemlist = [];
            },
          ),
        ),
-
+       floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.list),
+          onPressed: () {
+            navigatetohistorylist(context);
+          },
+      ),
       );
 
     }
