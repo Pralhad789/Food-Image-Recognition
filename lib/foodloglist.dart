@@ -17,7 +17,7 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
 final Query fooditemslist = FirebaseFirestore.instance.collection("UserData")
                             .doc(FirebaseAuth.instance.currentUser.uid)
                             .collection("FoodItems")                            
-                            .orderBy("DateTime",descending: true);
+                            .orderBy("Timestamp",descending: true);
 List userfooditemlist = [];
 
 
@@ -25,6 +25,7 @@ List userfooditemlist = [];
   void initState() {
     super.initState();
     checkAuthentification();
+    checkCurrentDateExists();
     fetchUserItemList();    
   }
 
@@ -40,7 +41,40 @@ List userfooditemlist = [];
       }
     });
   }
-
+  
+  //## Check if a document of current date exists on firestore
+  checkCurrentDateExists() async{
+    DateTime date = Timestamp.now().toDate();
+    String currentdate = DateFormat('dd-MM-yyyy').format(date);
+    try{      
+      await FirebaseFirestore.instance.collection("UserData")
+                            .doc(FirebaseAuth.instance.currentUser.uid)
+                            .collection("TotalTally")
+                            .doc(currentdate)
+                            .get()
+                            .then((doc){
+                              if(!doc.exists)
+                              {
+                                FirebaseFirestore.instance.collection("UserData")
+                                    .doc(FirebaseAuth.instance.currentUser.uid)
+                                    .collection("TotalTally")
+                                    .doc("$currentdate")
+                                    .set({
+                                      "Date": currentdate,
+                                      "TotalValue" : 0
+                                    });
+                                print("A NEW DOCUMENT SUCCESSFULLY CREATED"); 
+                              }
+                              else{
+                                print("DOCUMENT NOT CREATED");
+                              }
+                            });
+    }
+    catch(e){
+      print(e.toString());
+      return null;
+    }
+  }
     
   Future getUserData() async{
     List itemsList = [];
@@ -104,7 +138,7 @@ List userfooditemlist = [];
     } else {
       setState(() {
         userfooditemlist = resultant;
-        print('name of food item : -${userfooditemlist[1]}');
+        print('name of food item : -${userfooditemlist[0]}');
 
       });
     }

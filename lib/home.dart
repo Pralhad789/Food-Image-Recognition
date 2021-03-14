@@ -108,7 +108,8 @@ class _HomeState extends State<Home> {
       'FoodName' : _filteredFoodItems[0].fName,
       'Quantity' : _filteredFoodItems[0].fStdQty,
       'Calorie'  : _filteredFoodItems[0].fStdQtyCalorie,
-      'DateTime' : formatteddate
+      'DateTime' : formatteddate,
+      'Timestamp' : Timestamp.now()
     });
     
     setState(() {
