@@ -1,3 +1,5 @@
+import 'package:FoodNutrition/homesummary.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'home.dart';
@@ -22,7 +24,7 @@ class _SignUpState extends State<SignUp> {
       {
        Navigator.push(context, MaterialPageRoute(
         
-        builder: (context)=>Home()));
+        builder: (context)=>SummaryHome()));
     }
     }
     );
@@ -42,12 +44,17 @@ class _SignUpState extends State<SignUp> {
 
      try{
        User user = (await _auth.createUserWithEmailAndPassword(email: _email, password: _password)).user;
+       
        if(user!= null) 
        {
           await _auth.currentUser.updateProfile(displayName: _name);
           // UserUpdateInfo updateuser = UserUpdateInfo();
           // updateuser.displayName = _name;
           //  user.updateProfile(updateuser);
+          String uid = _auth.currentUser.uid;
+          FirebaseFirestore.instance.collection("UserData").doc(uid)
+                        .collection("UserInfo")
+                        .add({'Name' : _name});
        }
      }
      catch(e){

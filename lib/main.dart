@@ -1,3 +1,4 @@
+import 'package:FoodNutrition/homesummary.dart';
 import 'package:FoodNutrition/loginpage.dart';
 import 'package:FoodNutrition/signuppage.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Food Detection',
       home: MySplash(),
+      //home: SummaryHome(),
       debugShowCheckedModeBanner: false,
 
       routes: <String, WidgetBuilder>{

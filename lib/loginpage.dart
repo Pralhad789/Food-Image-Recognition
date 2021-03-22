@@ -1,4 +1,5 @@
 import 'package:FoodNutrition/home.dart';
+import 'package:FoodNutrition/homesummary.dart';
 import 'package:FoodNutrition/signuppage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -28,7 +29,7 @@ class _LoginState extends State<Login> {
 
       Navigator.push(context, MaterialPageRoute(
         
-        builder: (context)=>Home()));
+        builder: (context)=>SummaryHome()));
     }
 
    });
