@@ -34,6 +34,7 @@ class _SummaryHomeState extends State<SummaryHome> {
   User firebaseUser;
   User user;
   bool isloggedin= false; 
+  String sumcalorie;
 
   @override
   void initState() {
@@ -150,7 +151,7 @@ class _SummaryHomeState extends State<SummaryHome> {
     }
   }
 
-  fetchUserItemList() async {
+  fetchUserItemList() async {    
     dynamic resultant = await getUserData();
 
     if (resultant == null) {
@@ -198,10 +199,11 @@ class _SummaryHomeState extends State<SummaryHome> {
     } else {
       setState(() {
         historytotallist = resultant;   
-
+        sumcalorie = historytotallist[0]['TotalValue'].toString();
       });
       print('DISPLAY TOTAL : ');
         print(historytotallist[0]['TotalValue']);
+        
     }
   }
 
@@ -229,6 +231,7 @@ class _SummaryHomeState extends State<SummaryHome> {
    
   Future navigatetofoodloglist(context) async {
   Navigator.push(context, MaterialPageRoute(builder: (context) => Home())).whenComplete(fetchUserItemList());
+  Navigator.push(context, MaterialPageRoute(builder: (context) => Home())).whenComplete(fetchtotalsumlist());
   }
 
 
@@ -279,7 +282,8 @@ class _SummaryHomeState extends State<SummaryHome> {
                         ),
                         child: ListTile(
                           title: Text('CALORIES'),
-                          subtitle: Text('45'),
+                          //subtitle: num(historytotallist[0]['TotalValue']),
+                          subtitle: Text('$sumcalorie'),
                         ),
                       )
                     ),

@@ -20,7 +20,7 @@ class _SpeedDialWidgetState extends State<SpeedDialWidget> {
   }
 
   Future navigatetofoodloglist(context) async {
-  Navigator.push(context, MaterialPageRoute(builder: (context) => foodloglist()));
+  Navigator.push(context, MaterialPageRoute(builder: (context) => totalhistorylist()));
   }
 
   Future navigatetohistorylist(context) async {
@@ -37,17 +37,17 @@ class _SpeedDialWidgetState extends State<SpeedDialWidget> {
       curve: Curves.bounceInOut, 
       children: [ 
         SpeedDialChild( 
-          child: Icon(Icons.chrome_reader_mode, color: Colors.white), 
+          child: Icon(Icons.camera_alt, color: Colors.white), 
           backgroundColor: Colors.green, 
           onTap: () {navigatetoscanImage(context);},
           //onTap: () => print('Pressed Read Later'), 
-          label: 'Food Log List', 
+          label: 'Click Image', 
           labelStyle: 
               TextStyle(fontWeight: FontWeight.w500, color: Colors.white), 
           labelBackgroundColor: Colors.black, 
         ), 
         SpeedDialChild( 
-          child: Icon(Icons.create, color: Colors.white), 
+          child: Icon(Icons.list_alt, color: Colors.white), 
           backgroundColor: Colors.green, 
           onTap: () {navigatetofoodloglist(context);},
           //onTap: () => print('Pressed Write'), 

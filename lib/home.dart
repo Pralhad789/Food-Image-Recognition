@@ -191,12 +191,13 @@ class _HomeState extends State<Home> {
       ),
       body: Container(
         decoration:BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            stops: [0.004,1],
-            colors: [Color(0xFFa8e063),Color(0xFF56ab2f),]
-            )
+          color: Colors.white
+          // gradient: LinearGradient(
+          //   begin: Alignment.topCenter,
+          //   end: Alignment.bottomCenter,
+          //   stops: [0.004,1],
+          //   colors: [Colors.white]
+          //   )
         ),
         child: !isloggedin? CircularProgressIndicator():
          Container(
@@ -321,7 +322,7 @@ class _HomeState extends State<Home> {
         ),
         
       ),
-      floatingActionButton: SpeedDialWidget(),
+      //floatingActionButton: SpeedDialWidget(),
       // floatingActionButton: FloatingActionButton(
       //     child: Icon(Icons.list),
       //     onPressed: () {
@@ -329,157 +330,6 @@ class _HomeState extends State<Home> {
       //     },
       // ),
      ),
-    );
-    // return Scaffold(      
-    //   //drawer: NavDrawer(),
-    //   appBar: AppBar(
-    //     leading: IconButton(icon: Icon(Icons.arrow_back),
-    //     onPressed: ()async{
-    //       Navigator.pop(context,MaterialPageRoute(builder: (context) => SummaryHome()));
-    //     }
-    //     ),
-    //     title: Text('Scan Image'),
-    //     backgroundColor: Colors.blueAccent,        
-    //   ),
-    //   body: Container(
-    //     decoration:BoxDecoration(
-    //       gradient: LinearGradient(
-    //         begin: Alignment.topCenter,
-    //         end: Alignment.bottomCenter,
-    //         stops: [0.004,1],
-    //         colors: [Color(0xFFa8e063),Color(0xFF56ab2f),]
-    //         )
-    //     ),
-    //     child: !isloggedin? CircularProgressIndicator():
-    //      Container(
-    //       padding: EdgeInsets.symmetric(horizontal:24),
-    //       child: Column(
-    //         crossAxisAlignment: CrossAxisAlignment.center,
-    //         children: <Widget>[
-    //           SizedBox(height: 50,
-    //           ),
-    //           // Text('Predict Food Items', style: TextStyle(
-    //           //   color: Colors.white,
-    //           //   fontWeight: FontWeight.w800,
-    //           //   fontSize: 28
-    //           // ),),
-    //           // Text('Custom Tensorflow CNN', style: TextStyle(
-    //           //   color: Colors.black,
-    //           //   fontWeight: FontWeight.bold,
-    //           //   fontSize: 18
-    //           // ),),
-    //           // SizedBox(height: 40,
-    //           // ),
-    //           Container(
-    //             padding: EdgeInsets.all(30),
-    //             decoration: BoxDecoration(
-    //               color: Colors.white,
-    //               borderRadius: BorderRadius.circular(30),
-    //               boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.5), spreadRadius: 5,blurRadius: 7)],
-
-    //             ),
-    //             child: Column(
-    //               children: <Widget>[
-    //                 Container(
-    //                   child: Center(
-    //                     child: _loading ? Container(
-    //                       width: 300,
-    //                       child: Column(
-    //                         children: <Widget>[
-    //                           Image.asset('assets/nutrition.png'),
-    //                           SizedBox(height: 30,),
-    //                         ],
-    //                       ),
-    //                     ): Container(
-    //                       child: Column(
-    //                         children: <Widget>[
-    //                           Container(
-    //                             height: 300,
-    //                             child: ClipRRect(
-    //                               borderRadius: BorderRadius.circular(10),
-    //                               child: Image.file(_image),
-    //                             ),
-    //                           ),
-    //                           SizedBox(height: 20,),
-    //                           _output!=null? Text('Prediction is: ${_output[0]['label']}\n'
-    //                           ' Info: Qty: ${_filteredFoodItems[0].fStdQty} Calorie:${_filteredFoodItems[0].fStdQty}\n'
-    //                           'Protiens : ${_filteredFoodItems[0].fprotiens}  Carbohydrates : ${_filteredFoodItems[0].fcarbohydrates}\n'
-    //                           'Fats : ${_filteredFoodItems[0].ffats}',
-    //                           style: TextStyle(color: Colors.black,
-    //                           fontSize: 20),):Container(
-
-    //                           ),
-    //                           SizedBox(height: 10,)
-    //                         ],
-    //                       ),
-    //                     ),
-    //                   ),
-    //                 ),
-    //                 Container(
-    //                   width: MediaQuery.of(context).size.width,
-    //                   child: Column(
-    //                     children:<Widget> [
-    //                       GestureDetector(
-    //                         onTap: pickImage,
-    //                         child: Container(
-    //                           width: MediaQuery.of(context).size.width-180,
-    //                           alignment: Alignment.center,
-    //                           padding: EdgeInsets.symmetric(horizontal:24,vertical: 17),
-    //                           decoration: BoxDecoration(color: Color(0xFF56ab2f),
-    //                           borderRadius: BorderRadius.circular(6)
-    //                           ),
-    //                           child:Text('Take a photo',style: TextStyle(color: Colors.white,fontSize: 18),) ,
-    //                         ),
-    //                       ),
-    //                       SizedBox(height: 5,
-    //                       ),
-    //                       GestureDetector(
-    //                         onTap: pickGalleryImage,
-    //                         child: Container(
-    //                           width: MediaQuery.of(context).size.width-180,
-    //                           alignment: Alignment.center,
-    //                           padding: EdgeInsets.symmetric(horizontal:24,vertical: 17),
-    //                           decoration: BoxDecoration(color: Color(0xFF56ab2f),
-    //                           borderRadius: BorderRadius.circular(6)
-    //                           ),
-    //                           child:Text('Camera Roll',style: TextStyle(color: Colors.white,fontSize: 18),) ,
-    //                         ),
-    //                       ),
-    //                     ],
-    //                   ),
-    //                 ),
-    //               Container(
-    //                 child:RaisedButton(
-
-    //                       padding: EdgeInsets.fromLTRB(70,10,70,10),
-    //                       onPressed: signOut,
-    //                       child: Text('Signout',style: TextStyle( 
-    //                       color: Colors.white,
-    //                       fontSize: 20.0,
-    //                       fontWeight: FontWeight.bold                      
-    //                       )),
-    //                       color: Colors.orange,
-    //                       shape: RoundedRectangleBorder(
-    //                       borderRadius: BorderRadius.circular(20.0),
-    //                   ),
-    //                 )
-    //               ),
-    //               ],
-    //             ),
-    //           )
-    //         ],
-    //       ),
-
-    //     ),
-        
-    //   ),
-    //   floatingActionButton: SpeedDialWidget(),
-    //   // floatingActionButton: FloatingActionButton(
-    //   //     child: Icon(Icons.list),
-    //   //     onPressed: () {
-    //   //       navigatetofoodloglist(context);
-    //   //     },
-    //   // ),
-    // );
+    );    
   }
 }
