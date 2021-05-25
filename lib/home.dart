@@ -298,20 +298,20 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                   Container(
-                    child:RaisedButton(
+                    // child:RaisedButton(
 
-                          padding: EdgeInsets.fromLTRB(70,10,70,10),
-                          onPressed: signOut,
-                          child: Text('Signout',style: TextStyle( 
-                          color: Colors.white,
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold                      
-                          )),
-                          color: Colors.orange,
-                          shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                      ),
-                    )
+                    //       padding: EdgeInsets.fromLTRB(70,10,70,10),
+                    //       onPressed: signOut,
+                    //       child: Text('Signout',style: TextStyle( 
+                    //       color: Colors.white,
+                    //       fontSize: 20.0,
+                    //       fontWeight: FontWeight.bold                      
+                    //       )),
+                    //       color: Colors.orange,
+                    //       shape: RoundedRectangleBorder(
+                    //       borderRadius: BorderRadius.circular(20.0),
+                    //   ),
+                    // )
                   ),
                   ],
                 ),
@@ -322,7 +322,7 @@ class _HomeState extends State<Home> {
         ),
         
       ),
-      //floatingActionButton: SpeedDialWidget(),
+      floatingActionButton: SpeedDialWidget(),
       // floatingActionButton: FloatingActionButton(
       //     child: Icon(Icons.list),
       //     onPressed: () {

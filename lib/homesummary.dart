@@ -34,7 +34,7 @@ class _SummaryHomeState extends State<SummaryHome> {
   User firebaseUser;
   User user;
   bool isloggedin= false; 
-  String sumcalorie;
+  String sumcalorie,sumprotien,sumcarb,sumfat;
 
   @override
   void initState() {
@@ -105,6 +105,9 @@ class _SummaryHomeState extends State<SummaryHome> {
   Future getUserData() async {
     List itemsList = [];
     int calorietotal = 0;
+    int protientotal = 0;
+    int carbtotal = 0;
+    int fattotal = 0;
 
     DateTime date = Timestamp.now().toDate();
     String currentdate = DateFormat('dd-MM-yyyy').format(date);
@@ -121,6 +124,10 @@ class _SummaryHomeState extends State<SummaryHome> {
         for (var i = 0; i < itemsList.length; i++) {
           if (itemsList[i]['DateTime'] == currentdate) {
             calorietotal = calorietotal + itemsList[i]['Calorie'];
+            protientotal = protientotal + itemsList[i]['Protiens'];
+            carbtotal = carbtotal + itemsList[i]['Carbohydrates'];
+            fattotal = fattotal + itemsList[i]['Fats'];
+            
             print(calorietotal);
             print("THE DATE FETCHED FROM FIRESTORE :");
             print(itemsList[i]['DateTime']);
@@ -138,7 +145,10 @@ class _SummaryHomeState extends State<SummaryHome> {
             .doc(uid)
             .collection("TotalTally")
             .doc(currentdate)
-            .update({"Date": currentdate, "TotalValue": calorietotal}).then(
+            .update({"Date": currentdate, "TotalValue": calorietotal,
+                      "ProtienTotal" : protientotal,
+                      "CarbohydrateTotal" : carbtotal,
+                      "FatTotal" : fattotal}).then(
                 (_) {
           print("Success");
         });
@@ -200,6 +210,9 @@ class _SummaryHomeState extends State<SummaryHome> {
       setState(() {
         historytotallist = resultant;   
         sumcalorie = historytotallist[0]['TotalValue'].toString();
+        sumprotien = historytotallist[0]['ProtienTotal'].toString();
+        sumcarb = historytotallist[0]['CarbohydrateTotal'].toString();
+        sumfat = historytotallist[0]['FatTotal'].toString();
       });
       print('DISPLAY TOTAL : ');
         print(historytotallist[0]['TotalValue']);
@@ -230,6 +243,11 @@ class _SummaryHomeState extends State<SummaryHome> {
 }
    
   Future navigatetofoodloglist(context) async {
+  Navigator.push(context, MaterialPageRoute(builder: (context) => Home())).whenComplete(fetchUserItemList());
+  Navigator.push(context, MaterialPageRoute(builder: (context) => Home())).whenComplete(fetchtotalsumlist());
+  }
+
+  Future navigatetoscanImage(context) async {
   Navigator.push(context, MaterialPageRoute(builder: (context) => Home())).whenComplete(fetchUserItemList());
   Navigator.push(context, MaterialPageRoute(builder: (context) => Home())).whenComplete(fetchtotalsumlist());
   }
@@ -296,7 +314,7 @@ class _SummaryHomeState extends State<SummaryHome> {
                         ),
                         child: ListTile(
                           title: Text('PROTEINS'),
-                          subtitle: Text('55'),
+                          subtitle: Text('$sumprotien'),
                         ),
                       )
                     ),
@@ -309,7 +327,7 @@ class _SummaryHomeState extends State<SummaryHome> {
                         ),
                         child: ListTile(
                           title: Text('CARBOHYDRATES'),
-                          subtitle: Text('45'),
+                          subtitle: Text('$sumcarb'),
                         ),
                       )
                     ),
@@ -322,7 +340,7 @@ class _SummaryHomeState extends State<SummaryHome> {
                         ),
                         child: ListTile(
                           title: Text('FATS'),
-                          subtitle: Text('45'),
+                          subtitle: Text('$sumfat'),
                         ),
                       )
                     ),
@@ -347,7 +365,7 @@ class _SummaryHomeState extends State<SummaryHome> {
                    ),
                    leading: CircleAvatar(
                      child: Image(
-                       image: AssetImage(''),
+                       image: AssetImage('assets/foodlisticon.png'),
                      ),
                    ),
                   trailing: Text('${userfooditemlist[index]['Calorie'].toString()}'),
@@ -361,7 +379,13 @@ class _SummaryHomeState extends State<SummaryHome> {
           )
         ],
       ),
-      floatingActionButton: SpeedDialWidget(),      
+      // floatingActionButton: SpeedDialWidget(), 
+      floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: () {
+            navigatetoscanImage(context);
+          },
+      ),     
       drawer: NavDrawer(),
      ),
     );

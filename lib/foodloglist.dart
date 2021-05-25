@@ -19,6 +19,7 @@ class _foodloglistState extends State<foodloglist> {
       .orderBy("Timestamp", descending: true);
   List userfooditemlist = [];
   DocumentSnapshot documentSnapshot;
+  int index;
 
   @override
   void initState() {
@@ -143,6 +144,55 @@ class _foodloglistState extends State<foodloglist> {
          title: Text('Food Log list'),
          backgroundColor: Colors.redAccent,
        ),
+
+      //  body: Container(
+      //    child: StreamBuilder<QuerySnapshot>(
+      //      stream:
+      //       FirebaseFirestore.instance.collection("UserData")
+      //       .doc(FirebaseAuth.instance.currentUser.uid)
+      //       .collection("FoodItems").snapshots(),
+      //       builder: (context,snapshot){
+      //         if (snapshot.connectionState == ConnectionState.waiting) {
+      //           return Center(
+      //             child: CircularProgressIndicator(),
+      //           );
+      //         }
+      //         else{
+      //         return new ListView(
+      //             children: snapshot.data.docs.map((DocumentSnapshot documentSnapshot){
+      //               return Dismissible(
+      //                   key: ObjectKey(documentSnapshot.data().keys),
+      //                   onDismissed: (direction){
+      //                     documentSnapshot.data().remove(index);
+      //                   },
+      //                   direction: DismissDirection.startToEnd,
+      //                   child: Card(
+      //                     child: Container(
+      //                       height: 65,
+      //                       child: ListTile(
+      //                         leading: CircleAvatar(
+      //                           child: Image(
+      //                             image: AssetImage(''),
+      //                             ),
+      //                           ),
+      //                         title: Text(
+      //                           documentSnapshot.data()['FoodName'],
+      //                         ),
+      //                         subtitle: Text("Calorie :\t" +documentSnapshot.data()['Calorie'].toString()+"\t\t"+
+      //                                   "Protiens :\t"+documentSnapshot.data()['Protiens'].toString()+"\n"+
+      //                                   "Carbohydrates :\t"+documentSnapshot.data()['Carbohydrates'].toString()+"\t\t"+
+      //                                   "Fats :\t"+documentSnapshot.data()['Fats'].toString()),
+      //                         trailing: Text(documentSnapshot.data()['Calorie'].toString()),
+      //                       ),
+      //                     ),
+      //                   ),
+      //               );
+      //             }).toList(),
+      //         );
+      //         }
+      //       },
+      //    ),
+      //  ),
 
        body: Container(
          child: ListView.builder(

@@ -19,6 +19,7 @@ class _NavDrawerState extends State<NavDrawer> {
 
   List userinfolist = [];
   int index = 0;
+  String username;
   //final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
@@ -63,6 +64,7 @@ class _NavDrawerState extends State<NavDrawer> {
     } else {
       setState(() {
         userinfolist = resultant;
+        username = userinfolist[0]['Name'];
         //print('name of user : -${userinfolist[0]}');
       });
     }
@@ -87,7 +89,7 @@ class _NavDrawerState extends State<NavDrawer> {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  'User Name :'+ userinfolist[index]["Name"].toString(),
+                  'User Name : $username',
                   style: TextStyle(color: Colors.white, fontSize: 25),
                 ),
               ],

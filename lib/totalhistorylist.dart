@@ -79,7 +79,7 @@ class _totalhistorylistState extends State<totalhistorylist> {
       return Scaffold(
        appBar: AppBar(
          title: Text('History list'),
-         backgroundColor: Colors.redAccent,
+         backgroundColor: Colors.blue[300],
        ),
 
        body: Container(
