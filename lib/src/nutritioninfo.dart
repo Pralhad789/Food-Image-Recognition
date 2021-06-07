@@ -32,6 +32,7 @@ class NutritionInfo{
 
 
 final foodItems=[
+  //1
   new NutritionInfo(
     fName: "Apple",
     fStdQty: 182,
@@ -41,7 +42,7 @@ final foodItems=[
     fcarbohydrates: 25,
 
   ),
-
+  //2
   new NutritionInfo(
     fName: "Orange",
     fStdQty: 100,
@@ -50,7 +51,7 @@ final foodItems=[
     ffats: 0,
     fcarbohydrates: 18,
   ),
-
+  //3
   new NutritionInfo(
     fName: "Banana",
     fStdQty: 118,
@@ -59,7 +60,7 @@ final foodItems=[
     ffats: 1,
     fcarbohydrates: 27,
   ),
-
+  //4
   new NutritionInfo(
     fName: "Dosa",
     fStdQty: 97,
@@ -68,7 +69,7 @@ final foodItems=[
     ffats: 4,
     fcarbohydrates: 29,
   ),
-
+  //5
   new NutritionInfo(
     fName: "Watermelon",
     fStdQty: 286,
@@ -77,7 +78,7 @@ final foodItems=[
     ffats: 0,
     fcarbohydrates: 22,
   ),
-
+  //6
   new NutritionInfo(
     fName: "Dates",
     fStdQty: 7,
@@ -86,7 +87,7 @@ final foodItems=[
     ffats: 0,
     fcarbohydrates: 5,
   ),
-
+  //7
   new NutritionInfo(
     fName: "VegSandwhich",
     fStdQty: 363,
@@ -95,7 +96,7 @@ final foodItems=[
     ffats: 40,
     fcarbohydrates: 45,
   ),
-
+  //8
   new NutritionInfo(
     fName: "Grapes",
     fStdQty: 49,
@@ -104,4 +105,114 @@ final foodItems=[
     ffats: 0,
     fcarbohydrates: 9,
   ),
+  //9
+  new NutritionInfo(
+    fName: "BreadButter",
+    fStdQty: 49,
+    fStdQtyCalorie: 34,
+    fprotiens: 1,
+    ffats: 0,
+    fcarbohydrates: 9,
+  ),
+  //10
+  new NutritionInfo(
+    fName: "Dhokla",
+    fStdQty: 58,
+    fStdQtyCalorie: 152,
+    fprotiens: 6,
+    ffats: 7,
+    fcarbohydrates: 16,
+  ),
+  //11
+  new NutritionInfo(
+    fName: "EggOmelette",
+    fStdQty: 49,
+    fStdQtyCalorie: 34,
+    fprotiens: 1,
+    ffats: 0,
+    fcarbohydrates: 9,
+  ),
+  //12
+  new NutritionInfo(
+    fName: "Idli",
+    fStdQty: 49,
+    fStdQtyCalorie: 34,
+    fprotiens: 1,
+    ffats: 0,
+    fcarbohydrates: 9,
+  ),
+  //13
+  new NutritionInfo(
+    fName: "Mango",
+    fStdQty: 49,
+    fStdQtyCalorie: 34,
+    fprotiens: 1,
+    ffats: 0,
+    fcarbohydrates: 9,
+  ),
+  //14
+  new NutritionInfo(
+    fName: "Misal Pav",
+    fStdQty: 49,
+    fStdQtyCalorie: 34,
+    fprotiens: 1,
+    ffats: 0,
+    fcarbohydrates: 9,
+  ),
+  //15
+  new NutritionInfo(
+    fName: "Pancakes",
+    fStdQty: 49,
+    fStdQtyCalorie: 34,
+    fprotiens: 1,
+    ffats: 0,
+    fcarbohydrates: 9,
+  ),
+  //16
+  new NutritionInfo(
+    fName: "PavBhaji",
+    fStdQty: 49,
+    fStdQtyCalorie: 34,
+    fprotiens: 1,
+    ffats: 0,
+    fcarbohydrates: 9,
+  ),
+  //17
+  new NutritionInfo(
+    fName: "Pohe",
+    fStdQty: 49,
+    fStdQtyCalorie: 34,
+    fprotiens: 1,
+    ffats: 0,
+    fcarbohydrates: 9,
+  ),
+  //18
+  new NutritionInfo(
+    fName: "Samosa",
+    fStdQty: 49,
+    fStdQtyCalorie: 34,
+    fprotiens: 1,
+    ffats: 0,
+    fcarbohydrates: 9,
+  ),
+  //19
+  new NutritionInfo(
+    fName: "Tea",
+    fStdQty: 49,
+    fStdQtyCalorie: 34,
+    fprotiens: 1,
+    ffats: 0,
+    fcarbohydrates: 9,
+  ),
+  //20
+  new NutritionInfo(
+    fName: "Upma",
+    fStdQty: 49,
+    fStdQtyCalorie: 34,
+    fprotiens: 1,
+    ffats: 0,
+    fcarbohydrates: 9,
+  ),
+
+  
 ];

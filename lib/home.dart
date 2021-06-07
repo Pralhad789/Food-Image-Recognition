@@ -88,7 +88,7 @@ class _HomeState extends State<Home> {
   final NutritionInfo nutrition = NutritionInfo();
   
   classifyImage(File image) async{
-    var output=await Tflite.runModelOnImage(path: image.path, numResults: 13,
+    var output=await Tflite.runModelOnImage(path: image.path, numResults: 20,
     threshold: 0.2, imageMean: 127.5, imageStd: 127.5,
     );
     
@@ -131,7 +131,7 @@ class _HomeState extends State<Home> {
 
   //## Load the Tflite model
   loadModel() async{
-    await Tflite.loadModel(model: 'assets/model_new2.tflite', labels: 'assets/labels_new2.txt');
+    await Tflite.loadModel(model: 'assets/model_3.tflite', labels: 'assets/labels_3.txt');
   }
 
   @override
@@ -268,51 +268,84 @@ class _HomeState extends State<Home> {
                       width: MediaQuery.of(context).size.width,
                       child: Column(
                         children:<Widget> [
-                          GestureDetector(
-                            onTap: pickImage,
-                            child: Container(
-                              width: MediaQuery.of(context).size.width-180,
-                              alignment: Alignment.center,
-                              padding: EdgeInsets.symmetric(horizontal:24,vertical: 17),
-                              decoration: BoxDecoration(color: Color(0xFF56ab2f),
-                              borderRadius: BorderRadius.circular(6)
-                              ),
-                              child:Text('Take a photo',style: TextStyle(color: Colors.white,fontSize: 18),) ,
-                            ),
+                          Container(
+                            width: MediaQuery.of(context).size.width-180,
+                            height: MediaQuery.of(context).size.height-675,
+                          child :RaisedButton.icon(
+                              onPressed: pickImage,                             
+                              shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                              label: Text('Click Image', 
+                                     style: TextStyle(color: Colors.white),),
+                              icon: Icon(Icons.camera_alt, color:Colors.white,), 
+                              textColor: Colors.white,
+                              splashColor: Colors.blue,
+                              color: Colors.green,
+                          ),                          
                           ),
-                          SizedBox(height: 5,
+                          SizedBox(
+                            height: 5,
                           ),
-                          GestureDetector(
-                            onTap: pickGalleryImage,
-                            child: Container(
-                              width: MediaQuery.of(context).size.width-180,
-                              alignment: Alignment.center,
-                              padding: EdgeInsets.symmetric(horizontal:24,vertical: 17),
-                              decoration: BoxDecoration(color: Color(0xFF56ab2f),
-                              borderRadius: BorderRadius.circular(6)
-                              ),
-                              child:Text('Camera Roll',style: TextStyle(color: Colors.white,fontSize: 18),) ,
-                            ),
+                          Container(
+                            width: MediaQuery.of(context).size.width-180,
+                            height: MediaQuery.of(context).size.height-675,
+                          child :RaisedButton.icon(
+                              onPressed: pickGalleryImage,                             
+                              shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                              label: Text('Upload Image', 
+                                     style: TextStyle(color: Colors.white),),
+                              icon: Icon(Icons.file_upload, color:Colors.white,), 
+                              textColor: Colors.white,
+                              splashColor: Colors.blue,
+                              color: Colors.green,
+                          ),                          
                           ),
+                          // GestureDetector(
+                          //   onTap: pickImage,
+                          //   child: Container(
+                          //     width: MediaQuery.of(context).size.width-180,
+                          //     alignment: Alignment.center,
+                          //     padding: EdgeInsets.symmetric(horizontal:24,vertical: 17),
+                          //     decoration: BoxDecoration(color: Color(0xFF56ab2f),
+                          //     borderRadius: BorderRadius.circular(6)
+                          //     ),
+                          //     child:Text('Take a photo',style: TextStyle(color: Colors.white,fontSize: 18),) ,
+                          //   ),
+                          // ),
+                          // SizedBox(height: 5,
+                          // ),
+                          // GestureDetector(
+                          //   onTap: pickGalleryImage,
+                          //   child: Container(
+                          //     width: MediaQuery.of(context).size.width-180,
+                          //     alignment: Alignment.center,
+                          //     padding: EdgeInsets.symmetric(horizontal:24,vertical: 17),
+                          //     decoration: BoxDecoration(color: Color(0xFF56ab2f),
+                          //     borderRadius: BorderRadius.circular(6)
+                          //     ),
+                          //     child:Text('Camera Roll',style: TextStyle(color: Colors.white,fontSize: 18),) ,
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),
-                  Container(
-                    // child:RaisedButton(
+                  // Container(
+                  //   // child:RaisedButton(
 
-                    //       padding: EdgeInsets.fromLTRB(70,10,70,10),
-                    //       onPressed: signOut,
-                    //       child: Text('Signout',style: TextStyle( 
-                    //       color: Colors.white,
-                    //       fontSize: 20.0,
-                    //       fontWeight: FontWeight.bold                      
-                    //       )),
-                    //       color: Colors.orange,
-                    //       shape: RoundedRectangleBorder(
-                    //       borderRadius: BorderRadius.circular(20.0),
-                    //   ),
-                    // )
-                  ),
+                  //   //       padding: EdgeInsets.fromLTRB(70,10,70,10),
+                  //   //       onPressed: signOut,
+                  //   //       child: Text('Signout',style: TextStyle( 
+                  //   //       color: Colors.white,
+                  //   //       fontSize: 20.0,
+                  //   //       fontWeight: FontWeight.bold                      
+                  //   //       )),
+                  //   //       color: Colors.orange,
+                  //   //       shape: RoundedRectangleBorder(
+                  //   //       borderRadius: BorderRadius.circular(20.0),
+                  //   //   ),
+                  //   // )
+                  // ),
                   ],
                 ),
               )

@@ -79,7 +79,7 @@ class _totalhistorylistState extends State<totalhistorylist> {
       return Scaffold(
        appBar: AppBar(
          title: Text('History list'),
-         backgroundColor: Colors.blue[300],
+         backgroundColor: Colors.blueAccent,
        ),
 
        body: Container(
@@ -92,11 +92,11 @@ class _totalhistorylistState extends State<totalhistorylist> {
                 //  subtitle: Text("Calorie:" + historytotallist[index]['Calorie'].toString()+
                 //  "  Quantity:"+historytotallist[index]['Quantity'].toString()
                 //  ),
-                 leading: CircleAvatar(
-                   child: Image(
-                     image: AssetImage(''),
-                   ),
-                 ),
+                //  leading: CircleAvatar(
+                //    child: Image(
+                //      image: AssetImage(''),
+                //    ),
+                //  ),
                 trailing: Text('${historytotallist[index]['TotalValue'].toString()}'),
                ),
              );

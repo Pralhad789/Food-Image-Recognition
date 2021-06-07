@@ -1,4 +1,7 @@
+import 'package:FoodNutrition/foodloglist.dart';
+import 'package:FoodNutrition/home.dart';
 import 'package:FoodNutrition/loginpage.dart';
+import 'package:FoodNutrition/totalhistorylist.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +32,26 @@ class _NavDrawerState extends State<NavDrawer> {
     fetchUserInfo();
   }
 
+  Future navigatetodashboard(context) async {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => totalhistorylist()));
+  }
+
+  Future navigatetoscanimage(context) async {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => Home()));
+  }
+
+  Future navigatetofoodlog(context) async {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => foodloglist()));
+  }
+
+  Future navigatetohistorylist(context) async {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => totalhistorylist()));
+  }
+ 
   checkAuthentification() async {
     _auth.authStateChanges().listen((user) {
       if (user == null) {
@@ -101,27 +124,28 @@ class _NavDrawerState extends State<NavDrawer> {
                     image: AssetImage(''))),
           ),
           ListTile(
-            leading: Icon(Icons.input),
+            leading: Icon(Icons.login),
             title: Text('Welcome'),
-            onTap: () => {},
+            onTap: () => navigatetodashboard(context),
           ),
           ListTile(
-            leading: Icon(Icons.verified_user),
-            title: Text('Profile'),
-            onTap: () => {Navigator.of(context).pop()},
+            leading: Icon(Icons.camera_alt),
+            title: Text('Capture Image'),
+             onTap: () => navigatetoscanimage(context),
+            //onTap: () => {Navigator.of(context).pop()},
           ),
           ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Settings'),
-            onTap: () => {Navigator.of(context).pop()},
+            leading: Icon(Icons.list_alt),
+            title: Text('Food Log'),
+            onTap: () => navigatetofoodlog(context),
           ),
           ListTile(
-            leading: Icon(Icons.border_color),
-            title: Text('Feedback'),
-            onTap: () => {Navigator.of(context).pop()},
+            leading: Icon(Icons.history),
+            title: Text('History'),
+            onTap: () => navigatetohistorylist(context),
           ),
           ListTile(
-            leading: Icon(Icons.exit_to_app),
+            leading: Icon(Icons.logout),
             title: Text('Logout'),
             onTap: () => signOut(),            
             //onTap: () => {Navigator.of(context).pop()},

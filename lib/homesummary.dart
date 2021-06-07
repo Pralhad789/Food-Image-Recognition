@@ -39,10 +39,11 @@ class _SummaryHomeState extends State<SummaryHome> {
   @override
   void initState() {
     super.initState();
-    checkAuthentification();    
+    checkAuthentification(); 
+    checkCurrentDateExists();   
     fetchUserItemList();
     fetchtotalsumlist();
-    checkCurrentDateExists();  
+      
     
       
   }
@@ -90,7 +91,10 @@ class _SummaryHomeState extends State<SummaryHome> {
               .doc(FirebaseAuth.instance.currentUser.uid)
               .collection("TotalTally")
               .doc("$currentdate")
-              .set({"Date": currentdate, "TotalValue": 0});
+              .set({"Date": currentdate, "TotalValue": 0,
+                     "CarbohydrateTotal": 0,
+                     "FatTotal":0,
+                     "ProtienTotal":0});
           print("A NEW DOCUMENT SUCCESSFULLY CREATED");
         } else {
           print("DOCUMENT NOT CREATED");
@@ -137,6 +141,9 @@ class _SummaryHomeState extends State<SummaryHome> {
         }
         print("THE foodloglist CALORIE TOTAL VALUE IS :");
         print(calorietotal);
+        print(protientotal);
+        print(carbtotal);
+        print(fattotal);
 
         //## Update the "calorietotal" variable value to firestore to TotalTally collection
         String uid = _auth.currentUser.uid;
@@ -216,6 +223,9 @@ class _SummaryHomeState extends State<SummaryHome> {
       });
       print('DISPLAY TOTAL : ');
         print(historytotallist[0]['TotalValue']);
+        print(historytotallist[0]['ProtienTotal']);
+        print(historytotallist[0]['CarbohydrateTotal']);
+        print(historytotallist[0]['FatTotal']);
         
     }
   }

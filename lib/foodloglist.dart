@@ -142,7 +142,7 @@ class _foodloglistState extends State<foodloglist> {
       return Scaffold(
        appBar: AppBar(
          title: Text('Food Log list'),
-         backgroundColor: Colors.redAccent,
+         backgroundColor: Colors.blueAccent,
        ),
 
       //  body: Container(
@@ -210,7 +210,7 @@ class _foodloglistState extends State<foodloglist> {
                    ),
                    leading: CircleAvatar(
                      child: Image(
-                       image: AssetImage(''),
+                       image: AssetImage('assets/foodlisticon.png'),
                      ),
                    ),
                   trailing: Text('${userfooditemlist[index]['Calorie'].toString()}'),
