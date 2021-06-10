@@ -15,7 +15,7 @@ class _totalhistorylistState extends State<totalhistorylist> {
   final Query totaltallylist = FirebaseFirestore.instance.collection("UserData")
                             .doc(FirebaseAuth.instance.currentUser.uid)
                             .collection("TotalTally")                            
-                            .orderBy("Date",descending: true);
+                            .orderBy("Timestamp",descending: true);
   
   List historytotallist = [];
 

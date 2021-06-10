@@ -1,9 +1,11 @@
 import 'package:FoodNutrition/foodloglist.dart';
 import 'package:FoodNutrition/home.dart';
+import 'package:FoodNutrition/homesummary.dart';
 import 'package:FoodNutrition/loginpage.dart';
 import 'package:FoodNutrition/totalhistorylist.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class NavDrawer extends StatefulWidget {
@@ -34,7 +36,7 @@ class _NavDrawerState extends State<NavDrawer> {
 
   Future navigatetodashboard(context) async {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => totalhistorylist()));
+        context, MaterialPageRoute(builder: (context) => SummaryHome()));
   }
 
   Future navigatetoscanimage(context) async {

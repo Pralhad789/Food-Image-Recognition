@@ -94,7 +94,8 @@ class _SummaryHomeState extends State<SummaryHome> {
               .set({"Date": currentdate, "TotalValue": 0,
                      "CarbohydrateTotal": 0,
                      "FatTotal":0,
-                     "ProtienTotal":0});
+                     "ProtienTotal":0,
+                     "Timestamp" : Timestamp.now()});
           print("A NEW DOCUMENT SUCCESSFULLY CREATED");
         } else {
           print("DOCUMENT NOT CREATED");
@@ -155,7 +156,9 @@ class _SummaryHomeState extends State<SummaryHome> {
             .update({"Date": currentdate, "TotalValue": calorietotal,
                       "ProtienTotal" : protientotal,
                       "CarbohydrateTotal" : carbtotal,
-                      "FatTotal" : fattotal}).then(
+                      "FatTotal" : fattotal,
+                      "Timestamp" : Timestamp.now()},
+                      ).then(
                 (_) {
           print("Success");
         });
@@ -184,7 +187,7 @@ class _SummaryHomeState extends State<SummaryHome> {
   final Query totaltallylist = FirebaseFirestore.instance.collection("UserData")
                             .doc(FirebaseAuth.instance.currentUser.uid)
                             .collection("TotalTally")                            
-                            .orderBy("Date",descending: true);
+                            .orderBy("Timestamp",descending: true);
   
   List historytotallist = [];
 
